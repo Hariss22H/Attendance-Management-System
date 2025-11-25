@@ -1,12 +1,14 @@
 # Multi-stage build for Face Recognition Attendance System
 FROM python:3.9-bullseye
 
-# Install system dependencies
+# Install system dependencies including OpenGL libraries
 RUN apt-get update && apt-get install -y --no-install-recommends \
     libsm6 \
     libxext6 \
     libxrender-dev \
     libglib2.0-0 \
+    libgl1-mesa-glx \
+    libgomp1 \
     git \
     build-essential \
     curl \
