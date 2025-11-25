@@ -90,7 +90,7 @@ def testVal(inStr, acttyp):
     return True
 
 
-logo = Image.open(r"C:\Users\Asus\OneDrive\Desktop\github\Attendance-Management-system-using-face-recognition-master\UI_Image\0001.png")
+logo = Image.open(os.path.join(BASE_DIR, "UI_Image", "0001.png"))
 logo = logo.resize((50, 47), Image.Resampling.LANCZOS)
 logo1 = ImageTk.PhotoImage(logo)
 titl = tk.Label(window, bg="black", relief=RIDGE, bd=10, font=("arial", 35))

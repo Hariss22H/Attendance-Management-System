@@ -28,3 +28,23 @@ StudentDetails/studentdetails.csv
 *.log
 *.stackdump
 
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# AWS
+.aws/
+aws_access_key_id
+aws_secret_access_key
+
+# Docker
+.dockerignore
+docker-compose.override.yml
+

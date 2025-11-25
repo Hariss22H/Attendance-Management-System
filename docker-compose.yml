@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  # Streamlit Web Application
+  web:
+    build: .
+    container_name: attendance-app
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./TrainingImage:/app/TrainingImage
+      - ./TrainingImageLabel:/app/TrainingImageLabel
+      - ./StudentDetails:/app/StudentDetails
+      - ./Attendance:/app/Attendance
+      - ./UI_Image:/app/UI_Image
+    environment:
+      - STREAMLIT_SERVER_PORT=8501
+      - STREAMLIT_SERVER_ADDRESS=0.0.0.0
+      - STREAMLIT_SERVER_HEADLESS=true
+    restart: unless-stopped
+    networks:
+      - attendance-network
+
+  # PostgreSQL Database (Optional - for future scaling)
+  db:
+    image: postgres:14-alpine
+    container_name: attendance-db
+    environment:
+      POSTGRES_DB: attendance_db
+      POSTGRES_USER: attendance_user
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-secure_password_change_me}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+    networks:
+      - attendance-network
+    ports:
+      - "5432:5432"
+
+networks:
+  attendance-network:
+    driver: bridge
+
+volumes:
+  postgres_data:
